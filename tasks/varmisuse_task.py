@@ -299,14 +299,14 @@ class VarMisuse_Task(Sparse_Graph_Task):
                               ) -> None:
         node_label_char_length = self.params['graph_node_label_max_num_chars']
         placeholders['unique_labels_as_characters'] = \
-            tf.placeholder(dtype=tf.int32, shape=[None, node_label_char_length], name='unique_labels_as_characters')
+            tf.compat.v1.placeholder(dtype=tf.int32, shape=[None, node_label_char_length], name='unique_labels_as_characters')
         placeholders['node_labels_to_unique_labels'] = \
-            tf.placeholder(dtype=tf.int32, shape=[None], name='node_labels_to_unique_labels')
+            tf.compat.v1.placeholder(dtype=tf.int32, shape=[None], name='node_labels_to_unique_labels')
         placeholders['adjacency_lists'] = \
-            [tf.placeholder(dtype=tf.int32, shape=[None, 2], name='adjacency_e%s' % e)
+            [tf.compat.v1.placeholder(dtype=tf.int32, shape=[None, 2], name='adjacency_e%s' % e)
                 for e in range(self.num_edge_types)]
         placeholders['type_to_num_incoming_edges'] = \
-            tf.placeholder(dtype=tf.float32, shape=[self.num_edge_types, None], name='type_to_num_incoming_edges')
+            tf.compat.v1.placeholder(dtype=tf.float32, shape=[self.num_edge_types, None], name='type_to_num_incoming_edges')
 
         model_ops['initial_node_features'] = \
             self.__get_node_label_charcnn_embeddings(placeholders['unique_labels_as_characters'],
